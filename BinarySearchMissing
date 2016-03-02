@@ -1,0 +1,37 @@
+public class BinarySearchMissing {
+    //pre: a[i] >= a[i + 1]
+    //post: R = min(i) : a[i] <= x
+    public static int IterativeBinarySearch(int[] a, int x) {
+        return 0;
+    }
+
+    //pre: -1 <= l, r <= a.length, a[i] >= a[i + 1]
+    //post: R = min(i) : a[i] <= x
+    public static int RecursionBinarySearch(Integer[] cats, int l, int r) {
+        int mid = (l+r)/2;
+        if ((l == r ) && (l == 1) && (cats[mid] != cats[0])){
+            if (cats[mid] < cats[0]) return mid;
+            else return -mid - 1;
+        }
+        if ((l == r ) && (r > 1) && (cats[mid] != cats[0])){
+            if (cats[mid] < cats[0]) return mid;
+            else return -cats.length - 1;
+        }
+        if (cats[mid] == cats[0]) return  mid;
+        if (cats[0] < cats[mid]) return RecursionBinarySearch(cats,mid + 1,r);
+        else return RecursionBinarySearch(cats,l,mid);
+    }
+
+
+    public static void main(String[] args) throws Throwable {
+        int result = 0;
+        Integer cats[] = new Integer[args.length];
+        if (args.length > 1) {
+            for (int i = 0; i < args.length; i++) {
+                cats[i] = Integer.parseInt(args[i], 10);
+            }
+            result = RecursionBinarySearch(cats,1,cats.length - 1);
+        }
+        System.out.println(result - 1);
+    }
+}
